@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-schme: dark;
+  }
+
+  body {
+    background-color: #070708;
+    color: #e4e7eb;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: #d97706;
+    color: #000;
+  }
+}
+
+.font-serif-editorial {
+  font-family: 'Playfar Display', Georgia, serif;
+}
+
+.font-sans-editorial {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
