@@ -54,4 +54,63 @@ export default function App() {
     handleNavigate('contato');
   };
 
+  return (
+    <div className="min-h-screen bg-[#070708] text-neutral-100 flex flex-xol selection:bg-amber-400 selection:text-neutral-950">
+      <Navbar onNavigate={hamdleNavigate} onOpenPrintInquiry={() => handleOpenPrintInquiry(PHOTOS[0])}/>
+      
+      <main className="flex-1">
+        <Hero
+          featuredPhoto={featuredHeroPhoto}
+          onExploreGallery={() => handleNavigate('galeria')}
+          onExploreSeries={() => handleNavigate('series')}
+          onOpenPhoto={(photo) => setActiveLightboxPhotoId(photo.id)}
+        />
+        <Gallery
+          photos={PHOTOS}
+          onSelectPhoto={(photo) => setActiveLightboxPhotoId(photo.id)}
+          onOpenPrintInquiry={(photo) => handleOpenPrintInquiry(photo)}
+        />
+        <SeriesSection
+          photos={PHOTOS}
+          onSelectPhoto={(photo) => setActiveLightboxPhotoId(photo.id)}
+        />
+
+        <AboutSection />
+        <GearSection />
+
+        <ContactSection
+          prefiledMessage={prefilledMessage}
+          prefilledProjectType={prefilledProjectType}
+        />
+      </main>
+
+      <Footer 
+        onScrollToTop={handleScrollToTop} 
+        onNacvigate={handleNavigate}
+      />
+
+      {activeLightboxPhotoId && (
+        <LightboxModal
+          photos={PHOTOS}
+          activePhotoId={activeLightboxPhotoId}
+          onClose={() => setActivLightboxPhotoId(null)}
+          onSelectPhotoId={(id) => setActiveLightboxPhotoId(id)}
+          onOpenPrintInquiry={(photo) => {
+            setActiveLightboxPhotoId(null);
+            setActivePrintPhoto(photo);
+          }}
+        />
+      )}
+
+      {activePrintPhoto && (
+        <PrintModal
+          photo={activePrintPhoto}
+          photos={PHOTOS}
+          onClose={() => setActivePrintPhoto(null)}
+          onProceeddToInquiry={handleProceedFromPrintModal}
+        />
+      )}
+    </div>
+  );
+
 }
